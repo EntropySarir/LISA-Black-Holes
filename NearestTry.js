@@ -237,10 +237,11 @@ function nearestDRealData(){
         }
          
         SNR= 10*d_low/d_val
-        document.getElementById("result").innerHTML =  "For a similar binary i.e., "+ parseInt(M_low*1000)/1000+" M<sub>Sun</sub>-"+parseInt(mu_low*1000)/1000+" M<sub>Sun</sub>, the detection horizon is "+  d_low + "Gpc with an SNR=10"// M_low*M_val*mu_val// 
+        //document.getElementById("result").innerHTML =  "For a similar binary i.e., "+ parseInt(M_low*1000)/1000+" M<sub>Sun</sub>-"+parseInt(mu_low*1000)/1000+" M<sub>Sun</sub>, the detection horizon is "+  d_low + "Gpc with an SNR=10"// M_low*M_val*mu_val//
+        document.getElementById("error").innerHTML =  "* The binary can be detected with SNR=10 up to the detection horizon of \n"+  d_low // M_low*M_val*mu_val// 
     }
     else{
-        document.getElementById("result").innerHTML = "ERROR: Mass ratio should be < 1e-2 and total mass should be in the range of (10<sup>3</sup>,10<sup>8</sup>)M<sub>Sun</sub>"
+        document.getElementById("error").innerHTML = "ERROR: Mass ratio should be < 1e-2 and total mass should be in the range of (10<sup>3</sup>,10<sup>8</sup>)M<sub>Sun</sub>"
 
     }
     //document.getElementById("result").innerHTML =  "For a similar binary i.e., "+ parseInt(M_low*1000)/1000+" M<sub>Sun</sub>-"+parseInt(mu_low*1000)/1000+" M<sub>Sun</sub>, the detection horizon is "+  d_low + "Gpc with an SNR=10"//
@@ -251,11 +252,29 @@ function snrCalc(){
     M_val  = document.getElementById('M1').value;
     mu_val = document.getElementById('M2').value;
     d_val  = document.getElementById('d').value;
+    if(document.getElementById('M1') =="" || mu_val== "" || d_val=='' ){
+        document.getElementById("error").innerHTML = "* Inputs of M<sub>1</sub>, M<sub>2</sub> or d cannot be empty"
+        document.getElementById("result1").innerHTML = ""
+        document.getElementById("result2").innerHTML = ""
+    }    
+    else if(M_val<1000 ||M_val>100000000 || mu_val>1000 || mu_val<0.1 || mu_val/M_val>0.01 ){
+        document.getElementById("error").innerHTML = "* Accepted inputs: M<sub>1</sub>=(10<sup>3</sup>,10<sup>8</sup>); M<sub>2</sub>=(10<sup>-1</sup>,10<sup>3</sup>); q<10<sup>-2</sup>"
+        document.getElementById("result1").innerHTML = ""
+        document.getElementById("result2").innerHTML = ""
 
+    }
+    else{
     M_mu_d_SNR=NearestTriplet(M_val, mu_val, d_val)
-    SNR=M_mu_d_SNR[3]
+    SNR=((1000*M_mu_d_SNR[3])/1000).toString();
 
-    document.getElementById("result").innerHTML = "A similar binary  "+ parseInt(M_mu_d_SNR[0]*1000)/1000+" M<sub>Sun</sub>-"+parseInt(M_mu_d_SNR[1]*1000)/1000+" M<sub>Sun</sub> at the luminosity distance of "+  M_mu_d_SNR[2] + " Gpc is detectable with an SNR=" + SNR+" +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)/10)+"%";
+    //document.getElementById("result").innerHTML = "A similar binary  "+ parseInt(M_mu_d_SNR[0]*1000)/1000+" M<sub>Sun</sub>-"+parseInt(M_mu_d_SNR[1]*1000)/1000+" M<sub>Sun</sub> at the luminosity distance of "+  M_mu_d_SNR[2] + " Gpc is detectable with an SNR=" + SNR+" +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)*d_val/(10*d_val))+"%";
+    //document.getElementById("result1").innerHTML = "The binary at the luminosity distance of "+  d_val + " Gpc is detectable with an " +" SNR="  ;
+    //document.getElementById("result2").innerHTML = SNR.bold() +" +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)*d_val/(10*d_val))+"%";
+    document.getElementById("result1").innerHTML = ""  ;
+    document.getElementById("result2").innerHTML = "SNR = "+SNR.bold() +" +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)*d_val/(10*d_val))+"%";
+    document.getElementById("error").innerHTML = ""
+    }
+
 }
 
 function nearestDRealDataTry(){
@@ -265,12 +284,27 @@ function nearestDRealDataTry(){
     //Note that strain is Sqrt(POwer=dE/dt); dE/dt is prop to M^3 mu^2
     console.log(M_val)
     if(document.getElementById('M1') =="" || mu_val== "" ){
-        document.getElementById("result").innerHTML = "Pass Valid inputs"
+        document.getElementById("error").innerHTML = "* Inputs of M<sub>1</sub> or M<sub>2</sub> cannot be empty."
+        document.getElementById("result1").innerHTML = ""
+        document.getElementById("result2").innerHTML = ""
+    }
+    else if(M_val<1000 ||M_val>100000000 || mu_val>1000 || mu_val<0.1 || mu_val/M_val>0.01 ){
+        document.getElementById("error").innerHTML = "* Accepted inputs: M<sub>1</sub>=(10<sup>3</sup>,10<sup>8</sup>); M<sub>2</sub>=(10<sup>-1</sup>,10<sup>3</sup>); q<10<sup>-2</sup>"
+        document.getElementById("result1").innerHTML = ""
+        document.getElementById("result2").innerHTML = ""
+
     }
     else{
         M_mu_d_SNR=NearestTriplet(M_val, mu_val, d_val)
 
-        document.getElementById("result").innerHTML =  "A similar binary  "+ parseInt(M_mu_d_SNR[0]*1000)/1000+" M<sub>Sun</sub>-"+parseInt(M_mu_d_SNR[1]*1000)/1000+" M<sub>Sun</sub>, the detection horizon is "+  M_mu_d_SNR[2] + " +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)/10) +"% Gpc with an SNR=10"// M_low*M_val*mu_val// 
+        //document.getElementById("result").innerHTML =  "A similar binary  "+ parseInt(M_mu_d_SNR[0]*1000)/1000+" M<sub>Sun</sub>-"+parseInt(M_mu_d_SNR[1]*1000)/1000+" M<sub>Sun</sub>, the detection horizon is "+  M_mu_d_SNR[2] + " +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)/10) +"% Gpc with an SNR=10"// M_low*M_val*mu_val//
+        //d_result= (parseInt(M_mu_d_SNR[2]*100000)/100000).toString();
+        d_result = M_mu_d_SNR[2].toString()
+        //document.getElementById("result1").innerHTML =  "The binary can be detected with SNR=10 up to the detection horizon of \n" 
+        //document.getElementById("result2").innerHTML =  (d_result.bold()) + " +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/document.getElementById("result1").innerHTML =  "The binary can be detected with SNR=10 up to the detection horizon of \n" 
+        document.getElementById("result2").innerHTML =  "d<sub>H</sub> = " + (d_result.bold()) + " +/- " + parseFloat(parseInt(Math.abs(3*(M_mu_d_SNR[0]-M_val)/M_val +2*(M_mu_d_SNR[1]-mu_val)/mu_val)*1000)/10) +"% Gpc." // M_low*M_val*mu_val//  
+        document.getElementById("error").innerHTML = ""
+    
     }
 
 }
