@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {background-color: #f5f5f5;}
+        a {color: black;}
+        input,button {width:80%;
+                        border: 1px solid #555;
+                        padding:5px;}
+        .logo {
+            color: blue;
+            font-size: 30px
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav>
+        <h3 class="logo"> LISA Binary Source Calculator </h3>
+          <a href='about.html'> About </a>
+          &nbsp;
+          <a href='home.html'> Home </a>
+          &nbsp;
+          <a href='blog.html'> Read Blog </a>
+          </nav>
+    <nav>
+    <br>
+        <a href='about.html'> Waterfall plots </a>
+        &nbsp;
+        <a href='home.html'> Dependence of SNR on Spin</a>
+    </nav>
+    <br>
+        <main>
+          <table bordecheck input value getElementbyidr ='1'>
+            <tbody>
+              <tr>
+                <td>
+                 <!-- Blogging in here-->
+                  
+                  <article>
+                    <h4>Welcome to LISA small mass ratio binary sources calculator</h4>
+                    <!--<video controls width="50%"> 
+                        <source src="/home/chinmay/Videos/Brooklyn Nine nine/Brooklyn Nine Nine S01 (1080p Web-dl x265 HEVC)/Brooklyn Nine-Nine S01E01 Pilot 1080p WEB-DL x265 HEVC #lord.mkv" type = 'video/mkv'>
+                        <p> Using old browser </p>
+                    </video>-->
+                    <p>Enter M1 and M2 and d.</p>
+                    <P>
+                       <a href="blog/welcometohtml.html"> Read more</a>
+                    </P>
+                  </article>
+                  <hr />
+                  <article>
+                    
+                    <h6></h6>
+                    <center><img src="m1m2d.png" alt="test image" title ="m1m2d" width = "95%" ></center>
+                    <!--/home/chinmay/Documents/Coding Prep/LISA Binary Source calculator
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, reprehenderit.</p> -->
+                    <!--<P>
+                       <a href="blog/welcometohtml.html"> Read more</a>
+                    </P>-->
+                  </article>
+                </td>
+                
+                    <td width ='35%' valign='top'> <!--Subscribe form in here -->
+                    <aside>
+                        <form method='GET' action="">
+                    <label for="M1">Approx M1 &nbsp;&nbsp;&nbsp;: </label>
+                    <input type="number"
+                            name ='M1'
+                            id='M1'
+                            required='required'
+                            placeholder='Mass of larger BH in Solar Masses'>
+                    <select name="unit_M2" id="unit_M2">
+                        <option value="M_Sun">M_Sun</option>
+                        <option value="kg">kg</option>
+                    </select>
+                        
+                            <div>
+                        <label for="M2">Approx M2 &nbsp;&nbsp;&nbsp;: </label>
+                        <input type="number"
+                            name='M2'
+                            id='M2'
+                            required='required'
+                            placeholder='Mass of lighter BH in Solar Masses'>
+<!--                        <label for="cars">Unit:</label>-->
+                        <select name="unit_M2" id="unit_M2">
+                            <option value="M_Sun">M_Sun</option>
+                            <option value="kg">kg</option>
+                        </select>
+                    </div>
+                    <!--
+                    <div>
+                        <label for="a">Spin&nbsp; : </label>
+                        <input type="number"
+                            name='a'
+                            id='a'
+                            placeholder='dimensionelss spin'>
+                    </div>-->
+                    
+                    <div>
+                        <!--<label for="T">Time : </label>
+                        <input type="number"
+                            name='T'
+                            id='T'
+                            placeholder='Time in years'>
+                        <select name="unit_M2" id="unit_M2">
+                            <option value="years">years</option>
+                            <option value="months">months</option>
+                            <option value="days">days</option>
+                        </select>-->
+                        <br>
+                        <div>
+                            <!--<input type="button" onClick="nearestDRealData()" Value="Nearest Data" />--><!--<button aria-setsize="10%">Calculate horizon distance</button>--></div>
+                        <br> <br>
+                        <div>
+                            <label for="d">D &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </label>
+                            <input type="number"
+                                name='d'
+                                id='d'
+                                placeholder='luminosity distance'>
+                                <select name="unit_M2" id="unit_M2">
+                                    <option value="Gpc">Gpc</option>
+                                    <option value="Mpc">Mpc</option>
+                                    <option value="kpc">kpc</option>
+                                </select>
+                        </div>
+                        <!--<div>
+                            <input type='button' onClick="inputprint()"  Value="Print Input" />  <!-- id="printIpBtn" Print input</button>--></div>
+                        <!--<input id="ipPrint">        
+                    </div>
+                -->
+                    
+                        <!--<div>M1 : <input type="text" id="M" /><br>
+                             M2 : <input type="text" id="mu" /><br>
+                            </div>
+                        <div><input type="button" onClick="multiplyBy()" Value="Multiply" />
+                            <input type="button" onClick="divideBy()" Value="Divide" />-->
+                            <input type="button" id="detectionHorizonBtn" onClick="nearestDRealDataTry()" Value="Approx Detection Horizon" />
+                        </div>
+                        <!--<p>The binary of  is :-->
+                            <br>
+                        <span id = "result"></span>
+                        </p>
+                    <br>
+                    <div><button aria-setsize="10%">Print waveforms</button> <input type="button" id="snrBtn" onClick="snrCalc()" Value="Approx SNR" /></div>
+                    <br>
+                    <img src="TimeSrs.png" alt="test image" title ="Time Series" width = "40%">
+                    <img src="Fr.png" alt="test image" title ="Frequency Series" width = "40%">
+                    <br><br>
+
+                    </form></aside>
+                </td>
+                </tr>
+            </tbody>
+          </table>
+        </main>
+        <br><br><br>
+        <footer>
+          <p><a href="">Facebook</a>
+            <a href="twitter.com">Twitter</a>
+          </p>
+        &copy; 2030 ChinmayG
+        </footer>
+        <!--
+        nav
+        Blog Articles
+        Body
+        
+        -->   
+        
+    <!--<script  src="calcSNR.js"></script> -->
+
+    </body>
+
+    <style>
+        body {
+          background-image: url('Background.png');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+        }
+        </style>
+    <script src="NearestTry.js"></script>
+</html>
